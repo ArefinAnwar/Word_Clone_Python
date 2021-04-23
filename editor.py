@@ -41,15 +41,15 @@ class Word(QMainWindow):
         file_menu = QMenu('File', self)
         menu_bar.addMenu(file_menu)
 
-        save_action = QAction('Save', self)
+        save_action = QAction(QIcon('save.png'), 'Save', self)
         save_action.triggered.connect(self.save_file)
         file_menu.addAction(save_action)
 
-        open_action = QAction('Open', self)
+        open_action = QAction(QIcon('045-open file.png'), 'Open', self)
         open_action.triggered.connect(self.open_file)
         file_menu.addAction(open_action)
 
-        save_as_pdf = QAction('Export PDF', self)
+        save_as_pdf = QAction(QIcon('pdf.png'), 'Export PDF', self)
         save_as_pdf.triggered.connect(self.export_pdf)
         file_menu.addAction(save_as_pdf)
         
@@ -85,11 +85,11 @@ class Word(QMainWindow):
         view_menu = QMenu('View', self)
         menu_bar.addMenu(view_menu)
 
-        full_screen = QAction('Full Screen', self)
+        full_screen = QAction(QIcon('full_screen.png'), 'Full Screen', self)
         full_screen.triggered.connect(self.showMaximized)
         view_menu.addAction(full_screen)
 
-        normal_view = QAction('Normal View', self)
+        normal_view = QAction(QIcon('exit_full_screen.png'), 'Normal View', self)
         normal_view.triggered.connect(self.showNormal)
         view_menu.addAction(normal_view)
         
@@ -262,7 +262,7 @@ class Word(QMainWindow):
 
 
         #?########### Font Size Box #?###########
-    
+        
         self.font_size_box.setValue(20)
         self.font_size_box.valueChanged.connect(self.set_font_size)
         toolbar.addWidget(self.font_size_box)
