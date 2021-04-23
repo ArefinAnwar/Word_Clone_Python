@@ -262,7 +262,7 @@ class Word(QMainWindow):
 
 
         #?########### Font Size Box #?###########
-        
+
         self.font_size_box.setValue(20)
         self.font_size_box.valueChanged.connect(self.set_font_size)
         toolbar.addWidget(self.font_size_box)
@@ -284,6 +284,7 @@ class Word(QMainWindow):
         
         #?########### Arefin, don't change this! #?###########
         toolbar.setStyleSheet("QToolBar{spacing:5px;}")
+        toolbar.setMovable(False)
         self.addToolBar(toolbar)
         #?########### Arefin, don't change this! #?###########
         
