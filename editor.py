@@ -208,9 +208,9 @@ class Word(QMainWindow):
         
         #?########### Undo Action #?###########
         undo_action = QAction(QIcon("undo.png"), 'undo', self)
-        undo_action.triggered.connect(self.editor.undo)
+        undo_action.triggered.connect(self.custom_undo)
         toolbar.addAction(undo_action)          #Undo Action
-        
+
         toolbar.addSeparator()   #Adding separator
         toolbar.addSeparator()
         
@@ -317,7 +317,6 @@ class Word(QMainWindow):
         save_action = QAction(QIcon('save.png'), 'Save', self)
         save_action.triggered.connect(self.save_file)
         toolbar.addAction(save_action)
-
         toolbar.addSeparator()
         toolbar.addSeparator()
         
@@ -342,7 +341,15 @@ class Word(QMainWindow):
         
         
         
-        
+    
+    #?########### Custom Undo #?###########
+
+    def custom_undo(self):
+        self.editor.undo()
+        self.editor.setFontPointSize(20)
+        #Arefin, for adding the line above you had to write a function
+
+
     #?########### Font Size Logic #?###########
         
     def set_font_size(self):
@@ -375,17 +382,19 @@ class Word(QMainWindow):
         
     def change_theme(self):
         if(self.flag == 0):
-            self.editor.selectAll()
+            self.editor.selectAll() #Sellect all
             self.white_color = QColor(255, 255, 255)
-            self.editor.setTextColor(self.white_color)
-            self.editor.setStyleSheet("background-color: rgb(0, 0, 0);")
+            self.editor.setTextColor(self.white_color)  #Set white colour
+            self.editor.setFontPointSize(20)  #Font Size
+            self.editor.setStyleSheet("background-color: rgb(28, 28, 28);") #Background colour
             self.flag = 1
             
         else:
-            self.editor.selectAll()
-            self.black_color = QColor(0, 0, 0)
+            self.editor.selectAll() #Sellect all
+            self.black_color = QColor(0, 0, 0) #Set black colour
             self.editor.setTextColor(self.black_color)
-            self.editor.setStyleSheet("background-color: rgb(255, 255, 255);")
+            self.editor.setFontPointSize(20)  #Font Size
+            self.editor.setStyleSheet("background-color: rgb(255, 255, 255);")#Background colour
             self.flag = 0
             
  
