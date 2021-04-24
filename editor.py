@@ -7,6 +7,9 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import * 
 from PyQt5.QtCore import * 
 from PyQt5.QtWidgets import QMessageBox
+from darktheme.widget_template import DarkPalette
+
+
 
 class Word(QMainWindow):
     def __init__(self):
@@ -14,9 +17,7 @@ class Word(QMainWindow):
         
         self.editor = QTextEdit()
         self.editor.setFontPointSize(20)  #Font Size
-        
-        
-        
+             
         self.setCentralWidget(self.editor)
         
         self.setMinimumWidth(1000)  #Width
@@ -25,16 +26,16 @@ class Word(QMainWindow):
         self.title = "Word"
         self.setWindowTitle(self.title)  #Title
 
-        self.font_size_box = QSpinBox()
+        self.font_size_box = QSpinBox()  #Font size Changing box
         
-        
-        
-        self.menu_bar()
+        self.menu_bar()  
         
         self.tool_bar()
 
-        self.path = ''
+        self.path = '' #Stores path
 
+        self.flag = 0  #Realated to changing theme
+        
     def closeEvent(self, event):
 
         if(self.path == ''):
@@ -196,8 +197,6 @@ class Word(QMainWindow):
         printer.setOutputFileName(self.path)
         self.editor.document().print_(printer)
     
-    def update_title(self):
-        self.editor.setWindowTitle(self.title + '' + self.path)
 
 #?#################################################################
 #?#?##################### Tool Bar Starts #?#?#####################
@@ -318,6 +317,19 @@ class Word(QMainWindow):
         save_action = QAction(QIcon('save.png'), 'Save', self)
         save_action.triggered.connect(self.save_file)
         toolbar.addAction(save_action)
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+        
+        #?########### End of Save Action #?###########
+
+
+
+        #?########### Save Action #?###########
+
+        change_theme_action = QAction(QIcon('white.png'), 'Change Theme', self)
+        change_theme_action.triggered.connect(self.change_theme)
+        toolbar.addAction(change_theme_action)
         
         #?########### End of Save Action #?###########
         
@@ -360,8 +372,21 @@ class Word(QMainWindow):
         state = self.editor.fontUnderline()
         self.editor.setFontUnderline(not(state))
         
-
-    
+    def change_theme(self):
+        if(self.flag == 0):
+            self.editor.selectAll()
+            self.white_color = QColor(255, 255, 255)
+            self.editor.setTextColor(self.white_color)
+            self.editor.setStyleSheet("background-color: rgb(0, 0, 0);")
+            self.flag = 1
+            
+        else:
+            self.editor.selectAll()
+            self.black_color = QColor(0, 0, 0)
+            self.editor.setTextColor(self.black_color)
+            self.editor.setStyleSheet("background-color: rgb(255, 255, 255);")
+            self.flag = 0
+            
  
 ######Executing######
 app = QApplication(sys.argv)
