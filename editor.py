@@ -221,6 +221,7 @@ class Word(QMainWindow):
         #?########### Redo Action #?###########
         redo_action = QAction(QIcon("redo.png"), 'redo', self)
         redo_action.triggered.connect(self.editor.redo)
+        
         toolbar.addAction(redo_action)    #Redo action
         
         toolbar.addSeparator()
@@ -262,9 +263,9 @@ class Word(QMainWindow):
         toolbar.addAction(paste_action)     #Paste action
         
         #?########### End of Paste Action #?###########
-        
-        
-    
+                                    
+                                    
+                                
         #?########### Text Italic#?###########
         italic_action = QAction(QIcon("italic.png"), 'italic', self)
         italic_action.triggered.connect(self.italic_text)
@@ -273,7 +274,7 @@ class Word(QMainWindow):
         toolbar.addSeparator()
         toolbar.addSeparator()
         
-        #?########### End of Text Italic#?###########
+        #?########### End of Text Italic #?###########
 
         #?########### Text Bold #?###########
         bold_action = QAction(QIcon("bold.png"), 'bold', self)
@@ -317,6 +318,7 @@ class Word(QMainWindow):
         save_action = QAction(QIcon('save.png'), 'Save', self)
         save_action.triggered.connect(self.save_file)
         toolbar.addAction(save_action)
+
         toolbar.addSeparator()
         toolbar.addSeparator()
         
@@ -325,16 +327,68 @@ class Word(QMainWindow):
 
 
 
-        #?########### Save Action #?###########
+        #?########### Change Theme #?###########
 
         change_theme_action = QAction(QIcon('white.png'), 'Change Theme', self)
         change_theme_action.triggered.connect(self.change_theme)
         toolbar.addAction(change_theme_action)
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
         
-        #?########### End of Save Action #?###########
+        #?########### End of Change Theme #?###########
+
+
+
+        #?########### Center Align #?###########
+
+        center_align_action = QAction(QIcon('center-align.png'), 'Center Align', self)
+        center_align_action.triggered.connect(self.center_align)
+        toolbar.addAction(center_align_action)
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+        
+        #?########### End of Center Align  #?###########
+
+
+
+        #?########### Left Align #?###########
+
+        left_align_action = QAction(QIcon('left-align.png'), 'Left Align', self)
+        left_align_action.triggered.connect(self.left_align)
+        toolbar.addAction(left_align_action)
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+        
+        #?########### End of Left Align  #?###########
+        
+
+
+        #?########### Right Align #?###########
+
+        right_align_action = QAction(QIcon('right-align.png'), 'Right Align', self)
+        right_align_action.triggered.connect(self.right_align)
+        toolbar.addAction(right_align_action)
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+        
+        #?########### End of Right Align  #?###########
+
+
+
+        #?########### Right Align #?###########
+
+        justification_align_action = QAction(QIcon('justification.png'), 'Justification Align', self)
+        justification_align_action.triggered.connect(self.justification_align)
+        toolbar.addAction(justification_align_action)
+        
+        #?########### End of Right Align  #?###########
         
         #?########### Arefin, don't change this! #?###########
-        toolbar.setStyleSheet("QToolBar{spacing:5px;}")
+        toolbar.setStyleSheet("QToolBar{spacing:3px;}")
         toolbar.setMovable(False)
         self.addToolBar(toolbar)
         #?########### Arefin, don't change this! #?###########
@@ -348,6 +402,7 @@ class Word(QMainWindow):
         self.editor.undo()
         self.editor.setFontPointSize(20)
         #Arefin, for adding the line above you had to write a function
+        #self.editor.setAlignment('Qt::AlignLeft')
 
 
     #?########### Font Size Logic #?###########
@@ -380,6 +435,18 @@ class Word(QMainWindow):
         state = self.editor.fontUnderline()
         self.editor.setFontUnderline(not(state))
         
+    def center_align(self):
+        self.editor.setAlignment(Qt.AlignCenter)
+
+    def left_align(self):
+        self.editor.setAlignment(Qt.AlignLeft)
+
+    def right_align(self):
+        self.editor.setAlignment(Qt.AlignRight)
+
+    def justification_align(self):
+        self.editor.setAlignment(Qt.AlignJustify)
+
     def change_theme(self):
         if(self.flag == 0):
             self.editor.selectAll() #Sellect all
