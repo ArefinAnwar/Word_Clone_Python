@@ -34,6 +34,27 @@ class Word(QMainWindow):
         self.tool_bar()
 
         self.path = ''
+
+    def closeEvent(self, event):
+
+        if(self.path == ''):
+            quit_msg = "The file is not saved. Are you sure you want to exit Word?"
+            reply = QMessageBox.question(self, 'Warning! File not saved', quit_msg, QMessageBox.Yes, QMessageBox.No)
+
+            if(reply == QMessageBox.Yes):
+                event.accept()
+            else:
+                event.ignore()
+        else:
+            quit_msg = "Are you sure you want to exit the program Word?"
+            reply = QMessageBox.question(self, 'Exit Word', quit_msg, QMessageBox.Yes, QMessageBox.No)
+
+            if(reply == QMessageBox.Yes):
+                event.accept()
+            else:
+                event.ignore()
+
+        
     
     def menu_bar(self):
         menu_bar = QMenuBar()
@@ -92,9 +113,25 @@ class Word(QMainWindow):
         normal_view = QAction(QIcon('exit_full_screen.png'), 'Normal View', self)
         normal_view.triggered.connect(self.showNormal)
         view_menu.addAction(normal_view)
+
+        about_menu = QMenu('About', self)
+        about_menu.triggered.connect(self.about)
+        menu_bar.addMenu(about_menu)
+
+        about = QAction(QIcon('about.png'), 'About', self)
+        about.triggered.connect(self.about)
+        about_menu.addAction(about)
         
         self.setMenuBar(menu_bar)
-    
+    def about(self):
+        quit_msg = """ 
+        Word Editor
+        This apllication is made by Arefin Anwar. 
+        Copyright ©2021 Arefin Anwar. All rights reserved.
+
+        Version: 1.2"""
+        reply = QMessageBox.question(self, 'About', quit_msg, QMessageBox.Ok)
+
     #?########### ? Save File #?###########
     def save_file(self):
         if(self.path == ''):
@@ -201,6 +238,8 @@ class Word(QMainWindow):
         
         toolbar.addSeparator()
         toolbar.addSeparator()
+
+        
         
         #?########### End of Cut Action#?###########
         
