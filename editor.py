@@ -211,8 +211,8 @@ class Word(QMainWindow):
         undo_action.triggered.connect(self.custom_undo)
         toolbar.addAction(undo_action)          #Undo Action
 
-        toolbar.addSeparator()   #Adding separator
-        toolbar.addSeparator()
+        #toolbar.addSeparator()   #Adding separator
+        #toolbar.addSeparator()
         
         #?########### End of Undo Action #?###########
         
@@ -236,8 +236,8 @@ class Word(QMainWindow):
         cut_action.triggered.connect(self.editor.cut)
         toolbar.addAction(cut_action)       #Cut action
         
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
 
         
         
@@ -250,8 +250,8 @@ class Word(QMainWindow):
         copy_action.triggered.connect(self.editor.copy)
         toolbar.addAction(copy_action)      #Copy action
         
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
         #?########### End of Copy Action #?###########
         
         
@@ -262,30 +262,37 @@ class Word(QMainWindow):
         paste_action.triggered.connect(self.editor.paste)
         toolbar.addAction(paste_action)     #Paste action
         
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+
         #?########### End of Paste Action #?###########
                                     
-                                    
-                                
-        #?########### Text Italic#?###########
-        italic_action = QAction(QIcon("italic.png"), 'italic', self)
-        italic_action.triggered.connect(self.italic_text)
-        toolbar.addAction(italic_action)   
-
-        toolbar.addSeparator()
-        toolbar.addSeparator()
         
-        #?########### End of Text Italic #?###########
 
         #?########### Text Bold #?###########
         bold_action = QAction(QIcon("bold.png"), 'bold', self)
         bold_action.triggered.connect(self.bold_text)
         toolbar.addAction(bold_action)   
       
-
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
         
         #?########### End of Text bold#?###########
+
+
+
+        #?########### Text Italic#?###########
+
+        italic_action = QAction(QIcon("italic.png"), 'italic', self)
+        italic_action.triggered.connect(self.italic_text)
+        toolbar.addAction(italic_action)   
+
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
+        
+        #?########### End of Text Italic #?###########
+
+
 
         #?########### Text Underline #?###########
 
@@ -293,7 +300,7 @@ class Word(QMainWindow):
         underline_action.triggered.connect(self.underline_text)
         toolbar.addAction(underline_action)  
 
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
         toolbar.addSeparator()
         
         #?########### End of Text Underline #?###########
@@ -312,42 +319,14 @@ class Word(QMainWindow):
         #?########### End of Font Size Box #?###########
         
 
-
-        #?########### Save Action #?###########
-
-        save_action = QAction(QIcon('save.png'), 'Save', self)
-        save_action.triggered.connect(self.save_file)
-        toolbar.addAction(save_action)
-
-        toolbar.addSeparator()
-        toolbar.addSeparator()
-        
-        #?########### End of Save Action #?###########
-
-
-
-
-        #?########### Change Theme #?###########
-
-        change_theme_action = QAction(QIcon('white.png'), 'Change Theme', self)
-        change_theme_action.triggered.connect(self.change_theme)
-        toolbar.addAction(change_theme_action)
-
-        toolbar.addSeparator()
-        toolbar.addSeparator()
-        
-        #?########### End of Change Theme #?###########
-
-
-
         #?########### Center Align #?###########
 
         center_align_action = QAction(QIcon('center-align.png'), 'Center Align', self)
         center_align_action.triggered.connect(self.center_align)
         toolbar.addAction(center_align_action)
 
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
         
         #?########### End of Center Align  #?###########
 
@@ -359,8 +338,8 @@ class Word(QMainWindow):
         left_align_action.triggered.connect(self.left_align)
         toolbar.addAction(left_align_action)
 
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
         
         #?########### End of Left Align  #?###########
         
@@ -372,8 +351,8 @@ class Word(QMainWindow):
         right_align_action.triggered.connect(self.right_align)
         toolbar.addAction(right_align_action)
 
-        toolbar.addSeparator()
-        toolbar.addSeparator()
+        #toolbar.addSeparator()
+        #toolbar.addSeparator()
         
         #?########### End of Right Align  #?###########
 
@@ -384,9 +363,30 @@ class Word(QMainWindow):
         justification_align_action = QAction(QIcon('justification.png'), 'Justification Align', self)
         justification_align_action.triggered.connect(self.justification_align)
         toolbar.addAction(justification_align_action)
-        
+
+        toolbar.addSeparator()
+        toolbar.addSeparator()
         #?########### End of Right Align  #?###########
+        #?########### Change Theme #?###########
+
         
+        change_theme_action = QAction(QIcon('white.png'), 'Change Theme', self)
+        change_theme_action.triggered.connect(self.change_theme)
+        toolbar.addAction(change_theme_action)
+        
+        toolbar.addSeparator()
+        toolbar.addSeparator()
+        
+        #?########### End of Change Theme #?###########
+        #?########### Save Action #?###########
+
+        save_action = QAction(QIcon('save.png'), 'Save', self)
+        save_action.triggered.connect(self.save_file)
+        toolbar.addAction(save_action)
+
+        
+        
+        #?########### End of Save Action #?###########
         #?########### Arefin, don't change this! #?###########
         toolbar.setStyleSheet("QToolBar{spacing:3px;}")
         toolbar.setMovable(False)
@@ -396,7 +396,7 @@ class Word(QMainWindow):
         
         
     
-    #?########### Custom Undo #?###########
+    #?########### Custom Undo Function #?###########
 
     def custom_undo(self):
         self.editor.undo()
@@ -411,7 +411,10 @@ class Word(QMainWindow):
         value = self.font_size_box.value()
         self.editor.setFontPointSize(value)
         
-    
+
+
+    #?########### Bold Text Function #?###########
+
     def bold_text(self):
         if (self.editor.fontWeight() != QFont.Bold):
             self.editor.setFontWeight(QFont.Bold)
@@ -419,8 +422,9 @@ class Word(QMainWindow):
         else:
             self.editor.setFontWeight(QFont.Normal)
 
+
         
-    #?###########  Italic Text Logic #?###########
+    #?###########  Italic Text Function #?###########
     
     def italic_text(self):    
         if(self.editor.fontItalic()):
@@ -429,24 +433,41 @@ class Word(QMainWindow):
             self.editor.setFontItalic(True)
 
 
-    #?########### Font Underline #?###########
+    #?########### Font Underline Function #?###########
     
     def underline_text(self):
         state = self.editor.fontUnderline()
         self.editor.setFontUnderline(not(state))
         
+
+
+    #?########### Center Align Function #?###########
+
     def center_align(self):
         self.editor.setAlignment(Qt.AlignCenter)
+
+
+
+    #?########### Left Align Function #?###########
 
     def left_align(self):
         self.editor.setAlignment(Qt.AlignLeft)
 
+
+
+    #?########### Right Align Function #?###########
     def right_align(self):
         self.editor.setAlignment(Qt.AlignRight)
 
+
+
+    #?########### Justification Align Function #?###########
     def justification_align(self):
         self.editor.setAlignment(Qt.AlignJustify)
 
+
+
+    #?########### Change Theme Function #?###########
     def change_theme(self):
         if(self.flag == 0):
             self.editor.selectAll() #Sellect all
