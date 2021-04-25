@@ -8,7 +8,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import * 
 from PyQt5.QtWidgets import QMessageBox
 from darktheme.widget_template import DarkPalette
-
+import pyttsx3
 
 
 class Word(QMainWindow):
@@ -384,9 +384,17 @@ class Word(QMainWindow):
         save_action.triggered.connect(self.save_file)
         toolbar.addAction(save_action)
 
-        
+        toolbar.addSeparator()
+        toolbar.addSeparator()
         
         #?########### End of Save Action #?###########
+
+        text_to_speech = QAction(QIcon('speech.png'), 'Speech', self)
+        text_to_speech.triggered.connect(self.text_to_speech)
+        toolbar.addAction(text_to_speech)
+
+        
+
         #?########### Arefin, don't change this! #?###########
         toolbar.setStyleSheet("QToolBar{spacing:3px;}")
         toolbar.setMovable(False)
@@ -395,7 +403,11 @@ class Word(QMainWindow):
         
         
         
-    
+    def text_to_speech(self):
+        engine = pyttsx3.init()
+        text = self.editor.toPlainText()
+        engine.say(text)
+        engine.runAndWait()
     #?########### Custom Undo Function #?###########
 
     def custom_undo(self):
