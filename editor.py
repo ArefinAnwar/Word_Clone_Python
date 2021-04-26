@@ -143,7 +143,7 @@ class Word(QMainWindow):
             try:
                 with open(self.path, 'w') as f:
                     f.write(text)   # Creating file
-                    self.update_title()
+                    
                 
             except Exception as e:
                 print(e)
@@ -163,7 +163,7 @@ class Word(QMainWindow):
         try:
             with open(self.path, 'w') as f:  #opening file
                 f.write(text)
-                self.update_title()
+                
                 
         except Exception as e:
             print(e)
@@ -179,7 +179,15 @@ class Word(QMainWindow):
             with open(self.path, 'r') as f:
                 text = f.read()
                 self.editor.setText(text)
-                self.update_title()
+                if(self.flag == 2):
+                    self.editor.selectAll() #Sellect all
+                    self.white_color = QColor(255, 255, 255)
+                    self.editor.setTextColor(self.white_color)  #Set white colour
+                    value = self.font_size_box.value()
+                    self.editor.setFontPointSize(value)
+                else:
+                    value = self.font_size_box.value()
+                    self.editor.setFontPointSize(value)
 
         except Exception as e:
             print(e)
@@ -189,14 +197,30 @@ class Word(QMainWindow):
     #?########### ? Export as PDF #?###########
 
     def export_pdf(self):
-        self.path, _ = QFileDialog.getSaveFileName(self, "ExportPDF", "", "PDF files (*.pdf)")
+        if(self.flag == 2):
+            self.editor.selectAll() #Sellect all
+            self.black_color = QColor(0, 0, 0) #Set black colour
+            self.editor.setTextColor(self.black_color)
+            self.path, _ = QFileDialog.getSaveFileName(self, "ExportPDF", "", "PDF files (*.pdf)")
 
-        printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+            printer = QPrinter(QPrinter.PrinterMode.HighResolution)
 
-        printer.OutputFormat(QPrinter.OutputFormat.PdfFormat)
-        printer.setOutputFileName(self.path)
-        self.editor.document().print_(printer)
-    
+            printer.OutputFormat(QPrinter.OutputFormat.PdfFormat)
+            printer.setOutputFileName(self.path)
+            self.editor.document().print_(printer)
+            
+            self.editor.selectAll() #Sellect all
+            self.white_color = QColor(255, 255, 255)
+            self.editor.setTextColor(self.white_color)  #Set white colour
+        else:
+            self.path, _ = QFileDialog.getSaveFileName(self, "ExportPDF", "", "PDF files (*.pdf)")
+
+            printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+
+            printer.OutputFormat(QPrinter.OutputFormat.PdfFormat)
+            printer.setOutputFileName(self.path)
+            self.editor.document().print_(printer)    
+
 
 #?#################################################################
 #?#?##################### Tool Bar Starts #?#?#####################
@@ -412,7 +436,8 @@ class Word(QMainWindow):
 
     def custom_undo(self):
         self.editor.undo()
-        self.editor.setFontPointSize(20)
+        value = self.font_size_box.value()
+        self.editor.setFontPointSize(value)
         #Arefin, for adding the line above you had to write a function
         #self.editor.setAlignment('Qt::AlignLeft')
 
@@ -485,15 +510,17 @@ class Word(QMainWindow):
             self.editor.selectAll() #Sellect all
             self.white_color = QColor(255, 255, 255)
             self.editor.setTextColor(self.white_color)  #Set white colour
-            self.editor.setFontPointSize(20)  #Font Size
+            value = self.font_size_box.value()
+            self.editor.setFontPointSize(value) #Font Size
             self.editor.setStyleSheet("background-color: rgb(28, 28, 28);") #Background colour
-            self.flag = 1
+            self.flag = 2
             
         else:
             self.editor.selectAll() #Sellect all
             self.black_color = QColor(0, 0, 0) #Set black colour
             self.editor.setTextColor(self.black_color)
-            self.editor.setFontPointSize(20)  #Font Size
+            value = self.font_size_box.value()
+            self.editor.setFontPointSize(value) #Font Size
             self.editor.setStyleSheet("background-color: rgb(255, 255, 255);")#Background colour
             self.flag = 0
             
